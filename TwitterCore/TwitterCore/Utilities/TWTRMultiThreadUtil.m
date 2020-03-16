@@ -33,7 +33,6 @@
     NSString *warningMessage = [NSString stringWithFormat:@"TwitterKit must be used only from the main thread. Use from background threads will lead to unexpected behavior and crashes. Set a symbolic breakpoint in +[%@ %@] to debug this.", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
 
     NSLog(@"%@", warningMessage);
-    NSAssert(NO, @"%@", warningMessage);
 }
 
 @end
