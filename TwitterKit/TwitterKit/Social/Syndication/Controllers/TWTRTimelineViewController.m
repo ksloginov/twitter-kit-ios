@@ -163,8 +163,6 @@ static CGFloat const TWTREstimatedRowHeight = 150;
         }
     }
     [self loadNewestTweets];
-
-    [self.adPlacer loadAdUnitIfConfigured];
 }
 
 - (void)dealloc
@@ -374,18 +372,13 @@ static CGFloat const TWTREstimatedRowHeight = 150;
         ((TWTRTableViewProxy *)self.tableViewProxy).enabled = adConfiguration ? YES : NO;
 
         [self configureAdPlacer];
-        [self.adPlacer loadAdUnitIfConfigured];
         [self.tableViewProxy reloadData];
     }
 }
 
 - (void)configureAdPlacer
 {
-    if (_adConfiguration) {
-        _adPlacer = [[TWTRTableViewAdPlacer alloc] initWithTableView:self.tableView viewController:self adConfiguration:_adConfiguration];
-    } else {
-        _adPlacer = nil;
-    }
+    _adPlacer = nil;
 }
 
 @end

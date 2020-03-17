@@ -16,17 +16,12 @@
  */
 
 #import "TWTRTableViewAdPlacer.h"
-#import <MoPub/MPTableViewAdPlacer.h>
-#import "TWTRMoPubAdConfiguration.h"
-#import "TWTRMoPubAdConfiguration_Private.h"
-#import "TWTRMoPubVersionChecker.h"
 
 static Class TWTRTableViewAdPlacerClass = nil;
 
 @interface TWTRTableViewAdPlacer ()
 
 @property (nonatomic, readonly, nullable) id adPlacer;
-@property (nonatomic, readonly, nonnull) TWTRMoPubAdConfiguration *adConfig;
 
 @end
 
@@ -37,29 +32,6 @@ static Class TWTRTableViewAdPlacerClass = nil;
     if (self == [TWTRTableViewAdPlacer class]) {
         TWTRTableViewAdPlacerClass = NSClassFromString(@"MPTableViewAdPlacer");
     }
-}
-
-- (instancetype)initWithTableView:(UITableView *)tableView viewController:(UIViewController *)viewController adConfiguration:(TWTRMoPubAdConfiguration *)adConfiguration
-{
-    if (self = [super init]) {
-        _adConfig = adConfiguration;
-        id rendererConfiguration = [self.adConfig adRendererConfiguration];
-
-        if (![TWTRMoPubVersionChecker isValidVersion]) {
-            NSLog(@"[TwitterKit] Requires MoPub SDK version >= %td in order to render ads.", TWTRMoPubMinimumRequiredVersion);
-        } else {
-            if (rendererConfiguration) {
-                _adPlacer = [TWTRTableViewAdPlacerClass placerWithTableView:tableView viewController:viewController rendererConfigurations:@[rendererConfiguration]];
-            }
-        }
-    }
-
-    return self;
-}
-
-- (void)loadAdUnitIfConfigured
-{
-    [self.adPlacer loadAdsForAdUnitID:self.adConfig.adUnitID targeting:self.adConfig.adRequestTargeting];
 }
 
 @end

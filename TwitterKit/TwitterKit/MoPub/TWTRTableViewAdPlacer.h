@@ -21,7 +21,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "TWTRMoPubAdConfiguration.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,25 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TWTRTableViewAdPlacer : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
-
-/**
- *  Initializes a new wrapper ad placer.
- *
- *  @param tableView        The `UITableView` to places ads into.
- *  @param viewController   The view controller to present modal view content
- *                          when the ad cell is tapped.
- *  @param adConfiguration  The ad rendering configuration
- *
- *  @return A fully initialized wrapper ad placer.
- */
-- (instancetype)initWithTableView:(UITableView *)tableView viewController:(UIViewController *)viewController adConfiguration:(TWTRMoPubAdConfiguration *)adConfiguration;
-
-/**
- *  Starts injecting ads per server-side configuration into the associating table view. This is no-op
- *  if MoPub is not linked or the provided `adConfiguration` is invalid.
- *  @see `-[MPTableViewAdPlacer loadAdsForAdUnitID:targeting:]`.
- */
-- (void)loadAdUnitIfConfigured;
 
 @end
 
